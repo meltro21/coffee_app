@@ -68,44 +68,174 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
               ),
               //Blur Container
-              blurContainer(mediaHeight, mediaWidth),
+              blurContainer(mediaHeight * 0.5, mediaWidth),
               //Description
             ]),
-            description(mediaHeight * 0.3, mediaWidth)
+            description(mediaHeight * 0.2, mediaWidth),
+            //size menu
+            sizeMenu(mediaHeight * 0.15, mediaWidth),
+            //buy
+            buy(mediaHeight * 0.15, mediaWidth),
           ]),
         ),
       )),
     );
   }
 
+  Widget buy(double height, double width) {
+    return Container(
+      //color: Colors.yellow,
+      height: height,
+      width: width,
+      margin: EdgeInsets.only(left: width * 0.052, right: width * 0.052),
+      child: Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
+        Column(
+          children: [
+            Text(
+              'Price',
+              style:
+                  TextStyle(color: Color(0xffBBBBBB), fontSize: width * 0.03),
+            ),
+            Text.rich(TextSpan(children: [
+              TextSpan(
+                  text: '€',
+                  style: TextStyle(
+                      color: Color(0xffDD7700),
+                      fontWeight: FontWeight.bold,
+                      fontSize: width * 0.035)),
+              TextSpan(
+                  text: '4,20',
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: width * 0.035)),
+            ])),
+          ],
+        ),
+        Spacer(),
+        Container(
+          width: width * 0.7,
+          height: height * 0.4,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(25),
+            color: Color(0xffDD7700),
+          ),
+          child: Center(
+            child: Text(
+              'Buy now',
+              style:
+                  TextStyle(color: Color(0xffDDDDDD), fontSize: width * 0.034),
+            ),
+          ),
+        ),
+      ]),
+    );
+  }
+
+  Widget sizeMenu(double height, double width) {
+    return Container(
+        //color: Colors.purple,
+        margin: EdgeInsets.only(left: width * 0.052, right: width * 0.052),
+        height: height,
+        width: width,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Size',
+              style:
+                  TextStyle(color: Color(0xffBBBBBB), fontSize: width * 0.034),
+            ),
+            SizedBox(
+              height: height * 0.1,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                //S
+                Container(
+                  height: height * 0.3,
+                  width: width * 0.25,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(50),
+                    border: Border.all(
+                      color: Color(0xffDD7700),
+                    ),
+                  ),
+                  child: Center(
+                      child: Text(
+                    'S',
+                    style: TextStyle(
+                        color: Color(0xffDD7700), fontWeight: FontWeight.bold),
+                  )),
+                ),
+                //M
+                Container(
+                  height: height * 0.3,
+                  width: width * 0.25,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(50),
+                    border: Border.all(
+                      color: Colors.white,
+                    ),
+                  ),
+                  child: Center(
+                      child: Text(
+                    'M',
+                    style: TextStyle(
+                        color: Colors.white, fontWeight: FontWeight.bold),
+                  )),
+                ),
+                //L
+                Container(
+                  height: height * 0.3,
+                  width: width * 0.25,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(50),
+                    border: Border.all(
+                      color: Colors.white,
+                    ),
+                  ),
+                  child: Center(
+                      child: Text(
+                    'L',
+                    style: TextStyle(
+                        color: Colors.white, fontWeight: FontWeight.bold),
+                  )),
+                ),
+              ],
+            )
+          ],
+        ));
+  }
+
   Widget description(height, width) {
     return Container(
-      margin: EdgeInsets.only(top: height * 0.15, left: width * 0.05),
+      //color: Colors.teal,
+      padding: EdgeInsets.only(top: height * 0.1, left: width * 0.05),
       height: height,
       width: width,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SizedBox(
-            height: height * 0.05,
-          ),
           Text(
             'Description',
             style: TextStyle(
                 color: Color(0xffBBBBBB),
-                fontSize: height * 0.1,
+                fontSize: width * 0.035,
                 fontWeight: FontWeight.bold),
           ),
           SizedBox(
-            height: height * 0.02,
+            height: height * 0.05,
           ),
           Text(
             'A cappuccino is a coffee based drink made primarily',
             style: TextStyle(
-                color: Color(0xffBBBBBB),
-                fontSize: height * 0.06,
-                fontWeight: FontWeight.bold),
+              color: Color(0xffBBBBBB),
+              fontSize: width * 0.034,
+            ),
           ),
           SizedBox(
             height: height * 0.01,
@@ -115,16 +245,16 @@ class _MyHomePageState extends State<MyHomePage> {
               TextSpan(
                 text: 'from espresso and milk... ',
                 style: TextStyle(
-                    color: Color(0xffBBBBBB),
-                    fontSize: height * 0.06,
-                    fontWeight: FontWeight.bold),
+                  color: Color(0xffBBBBBB),
+                  fontSize: width * 0.034,
+                ),
               ),
               TextSpan(
                 text: 'Read more ',
                 style: TextStyle(
-                    color: Color(0xffDD7700),
-                    fontSize: height * 0.06,
-                    fontWeight: FontWeight.bold),
+                  color: Color(0xffDD7700),
+                  fontSize: width * 0.034,
+                ),
               ),
             ]),
           ),
@@ -134,18 +264,24 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   Widget blurContainer(double height, double width) {
+    var myHeight = height * 0.34;
     return Positioned(
-      top: height * 0.35,
+      top: height * 0.66,
       left: 10,
       right: 10,
       child: ClipRect(
         child: BackdropFilter(
           filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
           child: Container(
-            height: height * 0.15,
+            padding: EdgeInsets.only(
+                top: myHeight * 0.1,
+                bottom: myHeight * 0.1,
+                left: width * 0.05,
+                right: width * 0.05),
+            height: myHeight,
             width: width,
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(15),
+                borderRadius: BorderRadius.circular(35),
                 color: const Color.fromRGBO(0, 0, 0, 0.5)),
             child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -153,21 +289,17 @@ class _MyHomePageState extends State<MyHomePage> {
                 children: [
                   //Row 1
                   Container(
-                    margin: EdgeInsets.only(
-                      left: (height * 0.15) * 0.2,
-                      //top: (height * 0.15) * 0.1,
-                      right: (height * 0.15) * 0.2,
-                    ),
-                    height: (height * 0.15) * 0.4,
+                    //color: Colors.green,
+                    height: myHeight * 0.4,
                     width: width,
                     child: Row(children: [
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'Cuppuccino',
+                            'Cappuccino',
                             style: TextStyle(
-                                fontSize: (height * 0.15) * 0.13,
+                                fontSize: width * 0.05,
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold),
                           ),
@@ -175,8 +307,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             'With Oat Milk',
                             style: TextStyle(
                                 color: Color(0xffa59d97),
-                                fontWeight: FontWeight.bold,
-                                fontSize: (height * 0.15) * 0.1),
+                                fontSize: width * 0.033),
                           ),
                         ],
                       ),
@@ -184,23 +315,23 @@ class _MyHomePageState extends State<MyHomePage> {
                         child: SizedBox(),
                       ), //Coffee
                       Container(
-                        height: height * 0.15,
-                        width: width * 0.08,
+                        height: myHeight * 0.3,
+                        width: width * 0.11,
                         decoration: BoxDecoration(
                             color: Colors.black,
                             borderRadius: BorderRadius.circular(10)),
                         child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
                               Icon(
                                 Icons.coffee,
                                 color: Color(0xffDD7700),
-                                size: (height * 0.15) * 0.2,
+                                size: width * 0.04,
                               ),
                               Text(
                                 'Coffee',
                                 style: TextStyle(
-                                    fontSize: (height * 0.15) * 0.1,
+                                    fontSize: width * 0.025,
                                     color: Color(0xffa59d97)),
                               )
                             ]),
@@ -210,23 +341,23 @@ class _MyHomePageState extends State<MyHomePage> {
                       ),
                       //Milk
                       Container(
-                        height: height * 0.15,
-                        width: width * 0.08,
+                        height: myHeight * 0.3,
+                        width: width * 0.11,
                         decoration: BoxDecoration(
                             color: Colors.black,
                             borderRadius: BorderRadius.circular(10)),
                         child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
                               Icon(
                                 Icons.opacity,
                                 color: Color(0xffDD7700),
-                                size: (height * 0.15) * 0.2,
+                                size: width * 0.04,
                               ),
                               Text(
                                 'Milk',
                                 style: TextStyle(
-                                    fontSize: (height * 0.15) * 0.1,
+                                    fontSize: width * 0.025,
                                     color: Color(0xffa59d97)),
                               )
                             ]),
@@ -236,24 +367,20 @@ class _MyHomePageState extends State<MyHomePage> {
 
                   //Row 2
                   Container(
-                    margin: EdgeInsets.only(
-                      left: (height * 0.15) * 0.2,
-                      //top: (height * 0.15) * 0.1,
-                      right: (height * 0.15) * 0.2,
-                    ),
-                    height: (height * 0.15) * 0.4,
+                    //color: Colors.blue,
+                    height: myHeight * 0.4,
                     width: width,
                     child: Row(children: [
                       Icon(
                         Icons.star,
                         color: Color(0xffDD7700),
-                        size: ((height * 0.15) * 0.4) * 0.6,
+                        size: width * 0.04,
                       ),
                       SizedBox(
                         width: width * 0.003,
                       ),
                       Text(
-                        '4.4',
+                        '4.5',
                         style: TextStyle(color: Colors.white),
                       ),
                       SizedBox(
@@ -262,13 +389,14 @@ class _MyHomePageState extends State<MyHomePage> {
                       Text(
                         '(4.444)',
                         style: TextStyle(
-                            color: Color(0xffa59d97),
-                            fontSize: ((height * 0.15) * 0.4) * 0.3),
+                            color: Color(0xffa59d97), fontSize: width * 0.023),
                       ),
                       Spacer(),
+
+                      //Medium Roasted
                       Container(
-                        height: height * 0.06,
-                        width: (width * 0.08) + (width * 0.08) + (width * 0.02),
+                        height: myHeight * 0.2,
+                        width: 2 * (width * 0.11) + (width * 0.02),
                         decoration: BoxDecoration(
                             color: Colors.black,
                             borderRadius: BorderRadius.circular(10)),
@@ -279,7 +407,7 @@ class _MyHomePageState extends State<MyHomePage> {
                               color: Color(
                                 0xffa59d97,
                               ),
-                              fontSize: (height * 0.15) * 0.11,
+                              fontSize: width * 0.026,
                             ),
                           ),
                         ),
