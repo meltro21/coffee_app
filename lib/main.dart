@@ -36,230 +36,59 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     var mediaHeight = MediaQuery.of(context).size.height;
     var mediaWidth = MediaQuery.of(context).size.width;
-    mediaHeight > 500 ? mediaWidth = 500 : mediaHeight;
-    mediaWidth > 500 ? mediaWidth = 500 : mediaWidth;
-    print(mediaWidth);
+    var statusBarHeight = MediaQuery.of(context).viewPadding.top;
+    mediaHeight = mediaHeight - statusBarHeight;
+
+    if (mediaWidth > 500) {
+      mediaWidth = 500;
+    }
+
     return Scaffold(
       body: SafeArea(
           child: Container(
-        color: Color(0xff222222),
+        color: Color(0xff555555),
         height: mediaHeight,
-        width: mediaWidth,
+        width: MediaQuery.of(context).size.width,
         child: Center(
-          child: Column(mainAxisAlignment: MainAxisAlignment.start, children: [
-            //background image
-            Stack(children: [
-              Container(
-                margin: EdgeInsets.only(
-                  left: 10,
-                  right: 10,
-                ),
-                height: mediaHeight * 0.5,
-                width: mediaWidth,
-                decoration: BoxDecoration(
-                    image: DecorationImage(
-                        fit: BoxFit.cover,
-                        image: Image.asset('assets/coffee.jpeg').image),
-                    borderRadius: BorderRadius.circular(15)
-                    //     Image.network(
-                    //   'https://images.pexels.com/photos/2396220/pexels-photo-2396220.jpeg',
-                    //   fit: BoxFit.fill,
-                    // ).image),
+          child: Container(
+            color: Color(0xff222222),
+            height: mediaHeight,
+            width: mediaWidth,
+            child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  //background image
+                  Stack(children: [
+                    Container(
+                      margin: EdgeInsets.only(
+                        left: 10,
+                        right: 10,
+                      ),
+                      height: mediaHeight * 0.5,
+                      width: mediaWidth,
+                      decoration: BoxDecoration(
+                          image: DecorationImage(
+                              fit: BoxFit.cover,
+                              // image: Image.asset('assets/coffee.jpeg').image),
+                              image: Image.network(
+                                      'https://images.pexels.com/photos/2396220/pexels-photo-2396220.jpeg')
+                                  .image),
+                          borderRadius: BorderRadius.circular(15)),
                     ),
-              ),
-              //Blur Container
-              blurContainer(mediaHeight * 0.5, mediaWidth),
-              //Description
-            ]),
-            description(mediaHeight * 0.2, mediaWidth),
-            //size menu
-            sizeMenu(mediaHeight * 0.15, mediaWidth),
-            //buy
-            buy(mediaHeight * 0.15, mediaWidth),
-          ]),
+                    //Blur Container
+                    blurContainer(mediaHeight * 0.5, mediaWidth),
+                    //Description
+                  ]),
+                  description(mediaHeight * 0.2, mediaWidth),
+                  //size menu
+                  sizeMenu(mediaHeight * 0.15, mediaWidth),
+                  //buy
+                  buy(mediaHeight * 0.15, mediaWidth),
+                ]),
+          ),
         ),
       )),
-    );
-  }
-
-  Widget buy(double height, double width) {
-    return Container(
-      //color: Colors.yellow,
-      height: height,
-      width: width,
-      margin: EdgeInsets.only(left: width * 0.052, right: width * 0.052),
-      child: Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
-        Column(
-          children: [
-            Text(
-              'Price',
-              style:
-                  TextStyle(color: Color(0xffBBBBBB), fontSize: width * 0.03),
-            ),
-            Text.rich(TextSpan(children: [
-              TextSpan(
-                  text: '€',
-                  style: TextStyle(
-                      color: Color(0xffDD7700),
-                      fontWeight: FontWeight.bold,
-                      fontSize: width * 0.035)),
-              TextSpan(
-                  text: '4,20',
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: width * 0.035)),
-            ])),
-          ],
-        ),
-        Spacer(),
-        Container(
-          width: width * 0.7,
-          height: height * 0.4,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(25),
-            color: Color(0xffDD7700),
-          ),
-          child: Center(
-            child: Text(
-              'Buy now',
-              style:
-                  TextStyle(color: Color(0xffDDDDDD), fontSize: width * 0.034),
-            ),
-          ),
-        ),
-      ]),
-    );
-  }
-
-  Widget sizeMenu(double height, double width) {
-    return Container(
-        //color: Colors.purple,
-        margin: EdgeInsets.only(left: width * 0.052, right: width * 0.052),
-        height: height,
-        width: width,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'Size',
-              style:
-                  TextStyle(color: Color(0xffBBBBBB), fontSize: width * 0.034),
-            ),
-            SizedBox(
-              height: height * 0.1,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                //S
-                Container(
-                  height: height * 0.3,
-                  width: width * 0.25,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(50),
-                    border: Border.all(
-                      color: Color(0xffDD7700),
-                    ),
-                  ),
-                  child: Center(
-                      child: Text(
-                    'S',
-                    style: TextStyle(
-                        color: Color(0xffDD7700), fontWeight: FontWeight.bold),
-                  )),
-                ),
-                //M
-                Container(
-                  height: height * 0.3,
-                  width: width * 0.25,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(50),
-                    border: Border.all(
-                      color: Colors.white,
-                    ),
-                  ),
-                  child: Center(
-                      child: Text(
-                    'M',
-                    style: TextStyle(
-                        color: Colors.white, fontWeight: FontWeight.bold),
-                  )),
-                ),
-                //L
-                Container(
-                  height: height * 0.3,
-                  width: width * 0.25,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(50),
-                    border: Border.all(
-                      color: Colors.white,
-                    ),
-                  ),
-                  child: Center(
-                      child: Text(
-                    'L',
-                    style: TextStyle(
-                        color: Colors.white, fontWeight: FontWeight.bold),
-                  )),
-                ),
-              ],
-            )
-          ],
-        ));
-  }
-
-  Widget description(height, width) {
-    return Container(
-      //color: Colors.teal,
-      padding: EdgeInsets.only(top: height * 0.1, left: width * 0.05),
-      height: height,
-      width: width,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            'Description',
-            style: TextStyle(
-                color: Color(0xffBBBBBB),
-                fontSize: width * 0.035,
-                fontWeight: FontWeight.bold),
-          ),
-          SizedBox(
-            height: height * 0.05,
-          ),
-          Text(
-            'A cappuccino is a coffee based drink made primarily',
-            style: TextStyle(
-              color: Color(0xffBBBBBB),
-              fontSize: width * 0.034,
-            ),
-          ),
-          SizedBox(
-            height: height * 0.01,
-          ),
-          Text.rich(
-            TextSpan(children: [
-              TextSpan(
-                text: 'from espresso and milk... ',
-                style: TextStyle(
-                  color: Color(0xffBBBBBB),
-                  fontSize: width * 0.034,
-                ),
-              ),
-              TextSpan(
-                text: 'Read more ',
-                style: TextStyle(
-                  color: Color(0xffDD7700),
-                  fontSize: width * 0.034,
-                ),
-              ),
-            ]),
-          ),
-        ],
-      ),
     );
   }
 
@@ -420,4 +249,182 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
     );
   }
+}
+
+Widget description(height, width) {
+  return Container(
+    //color: Colors.teal,
+    padding: EdgeInsets.only(top: height * 0.1, left: width * 0.05),
+    height: height,
+    width: width,
+    child: Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'Description',
+          style: TextStyle(
+              color: Color(0xffBBBBBB),
+              fontSize: width * 0.035,
+              fontWeight: FontWeight.bold),
+        ),
+        SizedBox(
+          height: height * 0.05,
+        ),
+        Text(
+          'A cappuccino is a coffee based drink made primarily',
+          style: TextStyle(
+            color: Color(0xffBBBBBB),
+            fontSize: width * 0.034,
+          ),
+        ),
+        SizedBox(
+          height: height * 0.01,
+        ),
+        Text.rich(
+          TextSpan(children: [
+            TextSpan(
+              text: 'from espresso and milk... ',
+              style: TextStyle(
+                color: Color(0xffBBBBBB),
+                fontSize: width * 0.034,
+              ),
+            ),
+            TextSpan(
+              text: 'Read more ',
+              style: TextStyle(
+                color: Color(0xffDD7700),
+                fontSize: width * 0.034,
+              ),
+            ),
+          ]),
+        ),
+      ],
+    ),
+  );
+}
+
+Widget sizeMenu(double height, double width) {
+  return Container(
+      //color: Colors.purple,
+      margin: EdgeInsets.only(left: width * 0.052, right: width * 0.052),
+      height: height,
+      width: width,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Size',
+            style: TextStyle(color: Color(0xffBBBBBB), fontSize: width * 0.034),
+          ),
+          SizedBox(
+            height: height * 0.1,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              //S
+              Container(
+                height: height * 0.3,
+                width: (width * 0.25),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(50),
+                  border: Border.all(
+                    color: Color(0xffDD7700),
+                  ),
+                ),
+                child: Center(
+                    child: Text(
+                  'S',
+                  style: TextStyle(
+                      color: Color(0xffDD7700), fontWeight: FontWeight.bold),
+                )),
+              ),
+              //M
+              Container(
+                height: height * 0.3,
+                width: width * 0.25,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(50),
+                  border: Border.all(
+                    color: Colors.white,
+                  ),
+                ),
+                child: Center(
+                    child: Text(
+                  'M',
+                  style: TextStyle(
+                      color: Colors.white, fontWeight: FontWeight.bold),
+                )),
+              ),
+              //L
+              Container(
+                height: height * 0.3,
+                width: width * 0.25,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(50),
+                  border: Border.all(
+                    color: Colors.white,
+                  ),
+                ),
+                child: Center(
+                    child: Text(
+                  'L',
+                  style: TextStyle(
+                      color: Colors.white, fontWeight: FontWeight.bold),
+                )),
+              ),
+            ],
+          )
+        ],
+      ));
+}
+
+Widget buy(double height, double width) {
+  return Container(
+    //color: Colors.yellow,
+    height: height,
+    width: width,
+    margin: EdgeInsets.only(left: width * 0.052, right: width * 0.052),
+    child: Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
+      Column(
+        children: [
+          Text(
+            'Price',
+            style: TextStyle(color: Color(0xffBBBBBB), fontSize: width * 0.03),
+          ),
+          Text.rich(TextSpan(children: [
+            TextSpan(
+                text: '€',
+                style: TextStyle(
+                    color: Color(0xffDD7700),
+                    fontWeight: FontWeight.bold,
+                    fontSize: width * 0.035)),
+            TextSpan(
+                text: '4,20',
+                style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontSize: width * 0.035)),
+          ])),
+        ],
+      ),
+      Spacer(),
+      Container(
+        width: width * 0.7,
+        height: height * 0.4,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(25),
+          color: Color(0xffDD7700),
+        ),
+        child: Center(
+          child: Text(
+            'Buy now',
+            style: TextStyle(color: Color(0xffDDDDDD), fontSize: width * 0.034),
+          ),
+        ),
+      ),
+    ]),
+  );
 }
